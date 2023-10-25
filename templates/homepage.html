@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Text Summarization</title>
+
+    
+    <style>
+    .navbar {
+        padding: 5px 10px; 
+    }
+
+    .navbar-toggler {
+        margin: 5px;
+    }
+
+    .navbar-brand img {
+        max-height: 60px; 
+    }
+
+    .bg-curved {
+            background-color: #007bff;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .bg-curved::before {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, #007bff, #007bff);
+            border-radius: 60%;
+            
+        }
+
+        .bg-curved h1 {
+            font-size: 70px;
+        }
+
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .slide-in {
+            animation: slideInFromLeft 1s ease-in-out;
+        }
+        @keyframes slideInFromRight {
+        0% {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        100% {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    .slide-in-from-right {
+        animation: slideInFromRight 1s ease-in-out;
+    }
+        @keyframes slideOut {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(100%);
+        }
+    }
+    .slide-out {
+            animation: slideOut 1s ease-out;
+        }
+
+        
+        @keyframes slideInFromTop {
+            0% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .content-section.slide-in-top {
+            animation: slideInFromTop 1s ease-in-out;
+            animation-delay: 0.5s;
+        }
+       
+
+       
+    .carousel-indicators li {
+        background-color: black; /* Change this color to the desired color */
+    }
+    
+    /* Change the active indicator color */
+    .carousel-indicators .active {
+        background-color: rgb(25, 42, 198); /* Change this color to the desired active color */
+    }
+
+    html {
+    scroll-behavior: smooth;
+}
+
+
+
+
+
+       
+
+    </style>
+  </head>
+  <body>
+    
+
+                                <!--                       TEXT SUMMARISATION NAV BAR STARTS HERE                                      -->
+
+
+    <nav class="navbar navbar-r navbar-expand-md navbar-light bg-light">
+
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="https://idsil.com/index.php">
+                <div class="logo-image">
+                    <img src="https://idsil.com/images/IDS-logo.gif" class="img-fluid">
+                </div>
+            </a>
+
+            <button 
+             class="navbar-toggler"
+             type="button" 
+             data-bs-toggle="collapse" 
+             data-bs-target="#navbarNav" 
+             aria-controls="navbarNav" 
+             aria-expanded="false" 
+             aria-label="Toggle navigation">
+
+                <span class="navbar-toggler-icon">
+
+                </span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="">Text Summarization</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://roni98.pythonanywhere.com/text2">Text to Summary</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://roni98.pythonanywhere.com/pdf2">Pdf to Summary</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </nav>
+                                            <!--                 TEXT SUMMARISATION NAV BAR ENDS HERE                                         -->
+
+
+
+                                            <!--                   MAIN CONTENT DESIGN STARTS HERE                                             -->
+
+     <div class="container-fluid bg-primary bg-curved   text-white " style="padding-top: 60px; padding-bottom: 50px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6"style="text-align: start;">
+                        <h1 class="display-1 slide-in">TEXT </h1>
+                        <h1 class="display-1 slide-in">SUMMARIZATION </h1>
+                        <p class="slide-in">Summarize your text quickly and efficiently with our advanced text summarization tool. Whether you're a student, researcher, or professional, 
+                            our tool can help you extract key insights from lengthy documents, saving you time and effort.</p>
+                            <div class="btn-group slide-in">
+                                <a href="#summarySection" class="btn btn-light" aria-label="Get Started">
+                                    Get Started
+                                </a>
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                                                       
+                    </div>
+
+                    <div class="col-6 d-flex justify-content-end" >
+                        {% load static %}
+                        <img src="{% static 'pngwing.png' %}" alt="Project Image" class="img-fluid " style="width: 50%; ">
+                    </div>
+                </div>
+            </div>
+     </div>
+
+
+     
+
+     <div class="container ">
+        <div id="cardCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#cardCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#cardCarousel" data-slide-to="1"></li>
+                <li data-target="#cardCarousel" data-slide-to="2"></li>
+                <li data-target="#cardCarousel" data-slide-to="3"></li>
+                <li data-target="#cardCarousel" data-slide-to="4"></li>
+            </ol>
+    
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="container content-section" style="margin-top: 10%;">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="card shadow" style="margin-bottom: 60px;">
+                                    <div class="card-body" style="height: 200px;">
+                                        <h2 class="card-title">Welcome to Our Website</h2>
+                                        <p class="card-text">Discover the power of text summarization. Our tool uses advanced algorithms to condense large amounts of text into concise summaries while retaining the most important information. Try it out today!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container content-section" style="margin-top: 10%;">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="card shadow" style="margin-bottom: 60px;">
+                                    <div class="card-body" style="height: 200px;">
+                                        <h2 class="card-title">Features</h2>
+                                        <p class="card-text">Features like <span style="color: purple;">statistics</span>, <span style="color: blue;">top keywords</span>, and <span style="color: green;">summary length</span> 
+                                            selection provide advanced capabilities for the main content and summary sections.</p>
+                                            
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container content-section" style="margin-top: 10%;">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="card shadow" style="margin-bottom: 60px;">
+                                    <div class="card-body" style="height: 200px;">
+                                        <h2 class="card-title">Statistics</h2>
+                                        <p class="card-text">In the "<span style="color: purple;">Statistics</span>" section, users can access information such as <span style="color: blue;">word count</span>, 
+                                            <span style="color: green;">character count</span>, <span style="color: orange;">number of paragraphs</span>, and <span style="color: red;">number of sentences</span> 
+                                            to gain insights into their text content.
+                                            </p>
+                                            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container content-section" style="margin-top: 10%;">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="card shadow" style="margin-bottom: 60px;">
+                                    <div class="card-body" style="height: 200px;">
+                                        <h2 class="card-title">Top Keywords</h2>
+                                        <p class="card-text">The "<span style="color: blue;">Top Keywords</span>" feature allows users to identify the <span style="color: green;">most frequently used</span> keywords 
+                                            within their text content. This helps users choose the <span style="color: red;">right keywords</span> for a more effective and accurate summary.
+                                            </p>
+                                            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container content-section" style="margin-top: 10%;">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="card shadow" style="margin-bottom: 60px;">
+                                    <div class="card-body" style="height: 200px;">
+                                        <h2 class="card-title">Summary Length Selection</h2>
+                                        <p class="card-text">The "Summary length selection" feature empowers users to tailor their summary length according to their needs. 
+                                            Users can choose from options like <span style="color: rgb(48, 195, 231);">one-third summary</span>, <span style="color: rgb(181, 31, 156);">two-thirds summary</span>,
+                                             or <span style="color: rgba(196, 211, 23, 0.978);">full-length summary</span>, ensuring optimal content extraction.
+                                        </p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            
+            <a class="carousel-control-prev" href="#cardCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#cardCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md d-flex justify-content-center">
+            <div class="logo-image" >
+                {% load static %}
+                
+                <img src="{% static 'photo.png' %}" class="img-fluid" style="height: 200px;">
+            </div>
+            <p>
+                
+            </p>
+
+        </div>
+
+    </div>
+    <div class="row mt-5 "  style="font-style: oblique; font-family: Verdana, Geneva, Tahoma, sans-serif;margin-top: 6%;">
+        <div class="col-md text-center">
+            Let's Go
+
+        </div>
+
+    </div>
+    
+    
+
+
+
+    <div class="container" >
+        <div id="summaryCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div id="summarySection" class="row justify-content-center slide-in" style="margin-top: 50px;">
+                        <div class="col-md-6">
+                            <div class="card shadow mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Text to Summary</h5>
+                                <p class="card-text d-flex justify-content-between">
+                                    Summarize text quickly and efficiently.
+                                    <a href="https://roni98.pythonanywhere.com/text2" class="btn btn-primary">Get Started</a>
+                                    
+                                </p>
+                                    
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div id="summarySection" class="row justify-content-center slide-in-from-right" style="margin-top: 50px;">
+                        <div class="col-md-6">
+                            <div class="card shadow mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">PDF to Summary</h5>
+                                    <p class="card-text d-flex justify-content-between">Summarize PDF documents with ease.
+                                    <a href="https://roni98.pythonanywhere.com/pdf2" class="btn btn-primary">Get Started</a>
+                                    </p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more carousel items as needed -->
+            </div>
+    
+            <!-- Controls -->
+            <a class="carousel-control-prev" href="#summaryCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#summaryCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    
+    
+
+    <!--                   MAIN CONTENT DESIGN ENDS HERE                                              -->
+
+    <!-- ... footer ... -->
+
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>About Us</h4>
+                <p>We are 34+ years old organization built on the legacy of providing customized solutions to professionals and 
+                    business houses across different industries,
+                     enabling them to optimize their business processes and achieve their mission and organizational goals.</p>
+            </div>
+            <div class="col-md-6">
+                <h4>Contact Information</h4>
+                <p>Email: info@idsil.com</p>
+                <p>Phone: (+91) 172 505 3601</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ... footer ... -->
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ... The rest of your HTML code ... -->
+
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+    
+    
+  </body>
+</html>
+
+
